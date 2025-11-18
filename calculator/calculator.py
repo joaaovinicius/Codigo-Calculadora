@@ -9,15 +9,36 @@ def multiplicar(a, b):
 
 def dividir(a, b):
     if b == 0:
-        return "Erro: divisão por zero!"
+        raise ValueError("Divisão por zero!")
     return a / b
 
+def potencia(a, b):
+    return a ** b
+
+def calculate(a, b, op):
+    """Função usada pelos testes unitários, integração e E2E"""
+    if op == "+":
+        return somar(a, b)
+    elif op == "-":
+        return subtrair(a, b)
+    elif op == "*":
+        return multiplicar(a, b)
+    elif op == "/":
+        return dividir(a, b)
+    elif op == "^":
+        return potencia(a, b)
+    else:
+        return "Operação inválida!"
+
+
+# Interface opcional no terminal
 def calculadora():
     print("=== CALCULADORA PYTHON ===")
     print("1 - Somar")
     print("2 - Subtrair")
     print("3 - Multiplicar")
     print("4 - Dividir")
+    print("5 - Potência")
     print("0 - Sair")
 
     while True:
@@ -27,7 +48,7 @@ def calculadora():
             print("Encerrando calculadora...")
             break
 
-        if opcao not in ["1", "2", "3", "4"]:
+        if opcao not in ["1", "2", "3", "4", "5"]:
             print("Opção inválida, tente novamente!")
             continue
 
@@ -45,9 +66,16 @@ def calculadora():
         elif opcao == "3":
             resultado = multiplicar(a, b)
         elif opcao == "4":
-            resultado = dividir(a, b)
+            try:
+                resultado = dividir(a, b)
+            except ValueError as e:
+                print(e)
+                continue
+        elif opcao == "5":
+            resultado = potencia(a, b)
 
         print(f"Resultado: {resultado}")
 
-# Executa a calculadora
-calculadora()
+
+if __name__ == "__main__":
+    calculadora()

@@ -1,24 +1,25 @@
-from calculator.calculator import somar, subtrair, multiplicar, dividir
-
+from calculator import calculator
+import pytest
 
 def test_somar():
-    assert calculadora.somar(2, 3) == 5
-    assert calculadora.somar(-1, 1) == 0
-    assert calculadora.somar(10.5, 0.5) == 11
+    assert calculator.somar(2, 3) == 5
+    assert calculator.somar(-1, 1) == 0
+    assert calculator.somar(10.5, 0.5) == 11
 
 def test_subtrair():
-    assert calculadora.subtrair(5, 3) == 2
-    assert calculadora.subtrair(1, 1) == 0
-    assert calculadora.subtrair(-2, -3) == 1
+    assert calculator.subtrair(5, 3) == 2
+    assert calculator.subtrair(1, 1) == 0
+    assert calculator.subtrair(-2, -3) == 1
 
 def test_multiplicar():
-    assert calculadora.multiplicar(2, 3) == 6
-    assert calculadora.multiplicar(0, 10) == 0
-    assert calculadora.multiplicar(-2, 4) == -8
+    assert calculator.multiplicar(2, 3) == 6
+    assert calculator.multiplicar(0, 10) == 0
+    assert calculator.multiplicar(-2, 4) == -8
 
 def test_dividir():
-    assert calculadora.dividir(6, 3) == 2
-    assert calculadora.dividir(10, 2) == 5
+    assert calculator.dividir(6, 3) == 2
+    assert calculator.dividir(10, 2) == 5
 
 def test_dividir_por_zero():
-    assert calculadora.dividir(5, 0) == "Erro: divisão por zero!"
+    with pytest.raises(ValueError):
+        calculator.dividir(5, 0)
